@@ -9,7 +9,7 @@ services:
       - ${APPLICATION}:/go/src/${PROJECT_NAME}
     working_dir: /go/src/${PROJECT_NAME}
     command: bash -c "glide install && glide update && go run main.go"
-    env_file: ../src/.env
+    env_file: ${APPLICATION}/.env
     links:
       - redis
       - mongo
