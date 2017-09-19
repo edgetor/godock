@@ -1,0 +1,14 @@
+### Your code
+APPLICATION=../code
+
+## Your project name
+PROJECT_NAME=my_go_project
+
+### Data Path
+DATA_SAVE_PATH=./data
+
+### GO Server
+GO_PORT=3000
+
+### MONGODB Server
+MONGODB_PORT=27017

@@ -1,0 +1,54 @@
+version: "2"
+
+services:
+### Go Container #######################################
+  go:
+    build:
+      context: ./go
+    volumes:
+      - ${APPLICATION}:/go/src/${PROJECT_NAME}
+    working_dir: /go/src/${PROJECT_NAME}
+    command: bash -c "glide install && glide update && go run main.go"
+    env_file: ../src/.env
+    links:
+      - redis
+      - mongo
+    ports:
+      - "${GO_PORT}:3000"
+    networks:
+      - frontend
+      - backend
+
+### Redis Container #######################################
+  redis:
+    build: ./redis
+    volumes:
+      - ${DATA_SAVE_PATH}/redis:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+### MongoDB Container #######################################
+  mongo:
+    build: ./mongo
+    volumes:
+      - ${DATA_SAVE_PATH}/mongo:/data/db
+    ports:
+      - "${MONGODB_PORT}:27017"
+    networks:
+      - backend
+
+### Networks Setup ############################################
+networks:
+  frontend:
+    driver: "bridge"
+  backend:
+    driver: "bridge"
+
+### Volumes Setup #############################################
+volumes:
+  redis:
+    driver: "local"
+  mongo:
+    driver: "local"
