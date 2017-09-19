@@ -2,7 +2,7 @@
 ## Docker Compose for GO Projects
 
 Includes:
----
+------
   * Go (v. 1.9)
     * glide for package management
   * Redis
@@ -10,8 +10,12 @@ Includes:
 
 -----------
 
+Create a .env file, a sample has been included
+------
+
+-----------
 Your code will need a .env file, here is a sample:
----
+------
 
 ```
 HTTP_PORT=3000          # If using HTTP Server in GO
