@@ -1,14 +1,15 @@
-### Your code
-APPLICATION=../code
-
-## Your project name
-PROJECT_NAME=my_go_project
-
-### Data Path
-DATA_SAVE_PATH=./data
-
-### GO Server
+### GO Server Settings
 GO_PORT=3000
+GO_APPLICATION_PATH=../code
+GO_PROJECT_NAME=my_go_project
+
+### Node Server Settings
+NODE_ENV=production
+## Your package.json path
+NODE_APPLICATION_PATH=../code
+
+### Databases Settings
+DATA_SAVE_PATH=./data
 
 ### MONGODB Server
 MONGODB_PORT=27017
