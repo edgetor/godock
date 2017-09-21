@@ -6,10 +6,13 @@ services:
     build:
       context: ./go
     volumes:
-      - ${APPLICATION}:/go/src/${PROJECT_NAME}
-    working_dir: /go/src/${PROJECT_NAME}
+      - ${GO_APPLICATION_PATH}:/go/src/${GO_PROJECT_NAME}
+
+    working_dir: /go/src/${GO_PROJECT_NAME}
     command: bash -c "glide install && glide update && go run main.go"
-    env_file: ${APPLICATION}/.env
+
+    env_file:
+      - ${GO_APPLICATION_PATH}/.env
     links:
       - redis
       - mongo
@@ -17,6 +20,18 @@ services:
       - "${GO_PORT}:3000"
     networks:
       - frontend
+      - backend
+
+### NodeJS/Yarn Container #######################################
+  node:
+    build: ./node
+    environment:
+      - NODE_ENV="${NODE_ENV}"
+    volumes:
+      - ${NODE_APPLICATION_PATH}:/usr/src/app
+    working_dir: /usr/src/app
+    command: "yarn install"
+    networks:
       - backend
 
 ### Redis Container #######################################
